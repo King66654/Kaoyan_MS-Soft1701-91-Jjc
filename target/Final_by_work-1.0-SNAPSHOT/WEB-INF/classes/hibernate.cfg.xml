@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <!--hibernate-实现数据库的封装-->
+        <!--实现数据库连接的字符串-->
+        <property name="driverClassName">com.mysql.cj.jdbc.Driver</property>
+        <property name="url">
+            jdbc:mysql://localhost:3306/king?useSSL=false&amp;serverTimezone=GMT%2b8
+        </property>
+        <property name="username">root</property>
+        <property name="password">kobe</property>
+
+        <!-- SQL dialect 这个说明数据库类型为：Mysql-->
+        <property name="dialect">org.hibernate.dialect.MySQL8Dialect</property>
+        <!--这个值具体是多少，不要直接复制，去hibernate的jar包中去找！-->
+
+        <!--数据库的连接池设置，一定程度减少开销，这个包要下载！（alibaba）-->
+        <property name="connection.provider_class">com.alibaba.druid.support.hibernate.DruidConnectionProvider</property>
+
+        <!--开启SQL统计！-->
+        <property name="filters">stat</property>
+
+        <!--注册当前session的上下文，确保同一个线程中获取的session为同一个！-->
+        <property name="hibernate.current_session_context_class">thread</property><!--getCurrentSession-->
+        <!-- Echo all executed SQL to stdout -->
+        <property name="show_sql">true</property>
+        <property name="format_sql">true</property>
+
+        <!-- DB schema will be updated if needed -->
+        <property name="hbm2ddl.auto">update</property><!--create,会删除已经存在的表！-->
+
+        <mapping class="model.User_DB"/>
+        <mapping class="model.Date"/>
+        <mapping class="model.College"/>
+        <mapping class="model.Manage_college"/>
+        <mapping class="model.Friends"/>
+    </session-factory>
+</hibernate-configuration>

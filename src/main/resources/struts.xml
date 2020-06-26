@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+        "http://struts.apache.org/dtds/struts-2.5.dtd">
+
+<struts>
+    <constant name="struts.ognl.allowStaticMethodAccess" value="true"/>
+    <constant name="struts.i18n.encoding" value="UTF-8"/>
+    <constant name="struts.devMode" value="true" />
+    <constant name="struts.enable.DynamicMethodInvocation" value="true"/>
+    <constant name="struts.multipart.maxSize" value="104857600"></constant>
+    <package name="default" namespace="/" extends="struts-default">
+        <global-allowed-methods>regex:.*</global-allowed-methods>
+        <action name="Register" class="action.RegisterAction">
+            <result name="res_success">/login/user_login.jsp</result>
+            <result name="res_failure">/register/user_register.jsp</result>
+            <result name="upd_success">/manage_person/personal.jsp</result>
+            <result name="upd_failure">/manage_person/personal.jsp</result>
+        </action>
+        <action name="login" class="action.LoginAction">
+            <result name="success">/main_page/home.jsp</result>
+            <result name="failure">/login/user_login.jsp</result>
+        </action>
+        <action name="college" class="action.CollegeAction">
+            <result name="del_success">/manage_college/school.jsp</result>
+            <result name="del_failure">/manage_college/school.jsp</result>
+            <result name="add_failure">/manage_college/schools_insert.jsp</result>
+            <result name="add_success">/manage_college/school.jsp</result>
+            <result name="mohu_success">/manage_college/school.jsp</result>
+            <result name="mohu_failure">/manage_college/school.jsp</result>
+            <result name="select_success">/manage_college/school.jsp</result>
+            <result name="add_exists">/manage_college/school.jsp?check=false</result>
+        </action>
+        <action name="communication" class="action.FriendsAction">
+            <result name="del_success">/manage_friend/friends.jsp</result>
+            <result name="del_failure">/manage_friend/friends.jsp</result>
+            <result name="add_success">/manage_friend/friends.jsp</result>
+            <result name="add_failure">/manage_friend/friends_insert.jsp</result>
+            <result name="mohu_success">/manage_friend/friends.jsp</result><!--未完待续。。。-->
+            <result name="select_success" type="dispatcher">/manage_friend/friends.jsp</result>
+            <result name="upd_success">/manage_friend/friends.jsp</result>
+            <result name="upd_failure">/manage_friend/friends.jsp</result>
+        </action>
+        <action name="file_upload" class="action.File_operation_upload" >
+            <result name="upload_success">/manage_file/download.jsp</result>
+            <interceptor-ref name="defaultStack">
+                <param name="fileUpload.allowedExtensions">txt,jpg,gif,png,zip,exe,pdf,xls,doc,docx,avi,wmv,mpeg,mp4,mov,mkv,flv,f4v,m4v,rmvb,rm,3gp,dat,ts,mts,vob,mp3,midi,wma,vqf,amr</param>
+            </interceptor-ref>
+            <result name="upload_failure">/manage_file/upload.jsp</result>
+            <result name="input">/manage_file/upload.jsp</result>
+        </action>
+        <action name="file_download" class="action.File_operation_download">
+            <result name="success" type="stream">
+                <param name="inputName">targetFile</param>
+                <param name="contentDisposition">attachment;filename="${fileName}"</param>
+                <param name="bufferSize">4096</param>
+            </result>
+        </action>
+        <action name="file_delete" class="action.File_operation_delete">
+            <result name="success">/manage_file/download.jsp</result>
+            <result name="failure">/manage_file/download.jsp</result>
+        </action>
+        <action name="select_file_delete" class="action.File_select_deleteAction">
+            <result name="success">/manage_file/download.jsp</result>
+        </action>
+        <action name="date_operation" class="action.DateAction">
+            <result name="mohu_success">/manage_date/date.jsp</result>
+            <result name="mohu_failure">/manage_date/date.jsp</result>
+            <result name="del_success">/manage_date/date.jsp</result>
+            <result name="del_failure">/manage_date/date.jsp</result>
+            <result name="add_success">/manage_date/date.jsp</result>
+            <result name="add_failure">/manage_date/date.jsp</result>
+            <result name="upd_success">/manage_date/date.jsp</result>
+            <result name="upd_failure">/manage_date/date.jsp</result>
+            <result name="select_success">/manage_date/date.jsp</result>
+        </action>
+        <action name="safe" class="action.SafeAction">
+            <result name="success">/manage_person/password_update.jsp</result>
+            <result name="failure">/manage_person/password_update.jsp</result>
+        </action>
+        <action name="admin" class="action.AdminAction">
+            <result name="success">/admin/infomation.jsp</result>
+            <result name="failure">/admin/admin2.jsp?check=false</result>
+        </action>
+        <action name="admin_operation" class="action.Admin_operation">
+            <result name="del_success">/admin/infomation.jsp</result>
+            <result name="del_failure">/admin/infomation.jsp</result>
+            <result name="upd_success">/admin/infomation.jsp</result>
+            <result name="upd_failure">/admin/infomation.jsp</result>
+            <result name="select_delete">/admin/infomation.jsp</result>
+            <result name="mohu_success">/admin/infomation.jsp</result>
+        </action>
+        <action name="admin_school" class="action.Admin_school_operation">
+            <result name="upd_success">/admin/school.jsp</result>
+            <result name="upd_failure">/admin/school.jsp</result>
+            <result name="del_failure">/admin/school.jsp</result>
+            <result name="del_success">/admin/school.jsp</result>
+            <result name="add_failure">/admin/school.jsp</result>
+            <result name="add_success">/admin/school.jsp</result>
+            <result name="select_success">/admin/school.jsp</result>
+            <result name="mohu_success">/admin/school.jsp</result>
+        </action>
+    </package>
+</struts>
